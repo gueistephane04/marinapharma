@@ -392,6 +392,169 @@
             }
         }
 
+        /* Chatbot Styles */
+        .chatbot-button {
+            position: fixed;
+            bottom: 90px;
+            right: 20px;
+            z-index: 1000;
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary-blue), var(--dark-blue));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            animation: pulse 2s infinite;
+        }
+
+        .chatbot-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+        }
+
+        .chatbot-button i {
+            color: white;
+            font-size: 24px;
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            }
+            50% {
+                box-shadow: 0 4px 12px rgba(33, 150, 243, 0.6);
+            }
+            100% {
+                box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            }
+        }
+
+        .chatbot-modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2000;
+            width: 90%;
+            max-width: 700px;
+            height: 80vh;
+            max-height: 500px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .chatbot-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 1999;
+            backdrop-filter: blur(5px);
+        }
+
+        .chatbot-header {
+            background: linear-gradient(135deg, var(--primary-blue), var(--dark-blue));
+            color: white;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: between;
+            align-items: center;
+        }
+
+        .chatbot-header h4 {
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .chatbot-close {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 50%;
+            transition: background 0.3s;
+        }
+
+        .chatbot-close:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        .chatbot-iframe {
+            width: 100%;
+            height: calc(100% - 70px);
+            border: none;
+        }
+
+        .chatbot-tooltip {
+            position: absolute;
+            bottom: 70px;
+            right: 90px;
+            background: var(--dark-blue);
+            color: white;
+            padding: 10px 15px;
+            border-radius: 10px;
+            font-size: 14px;
+            white-space: nowrap;
+            opacity: 0;
+            transform: translateX(10px);
+            transition: all 0.3s ease;
+            pointer-events: none;
+        }
+
+        .chatbot-tooltip::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: -5px;
+            transform: translateY(-50%);
+            border: 5px solid transparent;
+            border-left-color: var(--dark-blue);
+        }
+
+        .chatbot-tooltip.show {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* Mobile responsiveness for chatbot */
+        @media (max-width: 768px) {
+            .chatbot-modal {
+                width: 95%;
+                height: 85vh;
+                max-height: none;
+            }
+            
+            .chatbot-button {
+                bottom: 80px;
+                right: 15px;
+                width: 55px;
+                height: 55px;
+            }
+            
+            .chatbot-button i {
+                font-size: 22px;
+            }
+            
+            .chatbot-tooltip {
+                display: none;
+            }
+        }
+
         /* Animation */
         @keyframes fadeInUp {
             from {
@@ -686,6 +849,10 @@
                     <i class="fas fa-map-marker-alt"></i>
                     Nous Localiser
                 </a>
+                <button onclick="openChatbot()" class="btn-emergency">
+                    <i class="fas fa-robot"></i>
+                    Chat en ligne
+                </button>
             </div>
         </div>
     </section>
@@ -779,3 +946,399 @@
         const observerOptions = {
             threshold: 0.1,
             rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('fade-in-up');
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements for animation
+        document.querySelectorAll('.service-card, .about-content, .hours-card, .location-info').forEach(el => {
+            observer.observe(el);
+        });
+
+        // WhatsApp floating button
+        const whatsappBtn = document.createElement('div');
+        whatsappBtn.innerHTML = `
+            <a href="https://wa.me/22891019691" target="_blank" 
+               style="position: fixed; bottom: 20px; right: 20px; z-index: 1000; 
+                      width: 60px; height: 60px; background: #25D366; border-radius: 50%; 
+                      display: flex; align-items: center; justify-content: center; 
+                      box-shadow: 0 4px 12px rgba(0,0,0,0.3); transition: all 0.3s ease;
+                      text-decoration: none;"
+               onmouseover="this.style.transform='scale(1.1)'"
+               onmouseout="this.style.transform='scale(1)'">
+                <i class="fab fa-whatsapp" style="color: white; font-size: 30px;"></i>
+            </a>
+        `;
+        document.body.appendChild(whatsappBtn);
+
+        // Chatbot integration
+        function initChatbot() {
+            // Create chatbot overlay
+            const overlay = document.createElement('div');
+            overlay.className = 'chatbot-overlay';
+            overlay.id = 'chatbotOverlay';
+            overlay.onclick = closeChatbot;
+            
+            // Create chatbot modal
+            const modal = document.createElement('div');
+            modal.className = 'chatbot-modal';
+            modal.id = 'chatbotModal';
+            modal.innerHTML = `
+                <div class="chatbot-header">
+                    <h4>
+                        <i class="fas fa-robot"></i>
+                        Assistant Pharmacie Marina
+                    </h4>
+                    <button class="chatbot-close" onclick="closeChatbot()">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+                <iframe class="chatbot-iframe" 
+                        src="https://app.manychat.com/flowPlayerEmbed?share_hash=3323040_4a3fd313d918d19da12b64b35ed283590ac1702c" 
+                        allowFullScreen>
+                </iframe>
+            `;
+            
+            // Create chatbot button
+            const chatbotBtn = document.createElement('button');
+            chatbotBtn.className = 'chatbot-button';
+            chatbotBtn.onclick = openChatbot;
+            chatbotBtn.innerHTML = '<i class="fas fa-robot"></i>';
+            
+            // Create tooltip
+            const tooltip = document.createElement('div');
+            tooltip.className = 'chatbot-tooltip';
+            tooltip.textContent = 'Besoin d\'aide ? Discutez avec nous !';
+            
+            // Append elements to body
+            document.body.appendChild(overlay);
+            document.body.appendChild(modal);
+            document.body.appendChild(chatbotBtn);
+            document.body.appendChild(tooltip);
+            
+            // Show tooltip after 3 seconds, then hide after 5 seconds
+            setTimeout(() => {
+                tooltip.classList.add('show');
+                setTimeout(() => {
+                    tooltip.classList.remove('show');
+                }, 5000);
+            }, 3000);
+            
+            // Show tooltip on hover
+            chatbotBtn.addEventListener('mouseenter', () => {
+                tooltip.classList.add('show');
+            });
+            
+            chatbotBtn.addEventListener('mouseleave', () => {
+                tooltip.classList.remove('show');
+            });
+        }
+
+        window.openChatbot = function() {
+            document.getElementById('chatbotOverlay').style.display = 'block';
+            document.getElementById('chatbotModal').style.display = 'block';
+            document.body.style.overflow = 'hidden';
+            
+            // Add fade in animation
+            const modal = document.getElementById('chatbotModal');
+            modal.style.opacity = '0';
+            modal.style.transform = 'translate(-50%, -50%) scale(0.9)';
+            
+            setTimeout(() => {
+                modal.style.transition = 'all 0.3s ease';
+                modal.style.opacity = '1';
+                modal.style.transform = 'translate(-50%, -50%) scale(1)';
+            }, 10);
+        };
+
+        window.closeChatbot = function() {
+            const modal = document.getElementById('chatbotModal');
+            const overlay = document.getElementById('chatbotOverlay');
+            
+            modal.style.opacity = '0';
+            modal.style.transform = 'translate(-50%, -50%) scale(0.9)';
+            
+            setTimeout(() => {
+                overlay.style.display = 'none';
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }, 300);
+        };
+
+        // Initialize chatbot when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            initChatbot();
+        });
+
+        // Search functionality (basic implementation)
+        function initSearch() {
+            const searchContainer = document.createElement('div');
+            searchContainer.innerHTML = `
+                <div class="search-overlay" id="searchOverlay" style="display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.8); z-index: 2000; align-items: center; justify-content: center;">
+                    <div class="search-modal" style="background: white; border-radius: 15px; padding: 30px; max-width: 500px; width: 90%;">
+                        <div style="display: flex; justify-content: between; align-items: center; margin-bottom: 20px;">
+                            <h4 style="margin: 0; color: var(--dark-blue);">Rechercher un produit</h4>
+                            <button onclick="closeSearch()" style="background: none; border: none; font-size: 24px; cursor: pointer;">&times;</button>
+                        </div>
+                        <input type="text" id="searchInput" placeholder="Tapez votre recherche..." 
+                               style="width: 100%; padding: 15px; border: 2px solid #ddd; border-radius: 10px; font-size: 16px; margin-bottom: 20px;">
+                        <div id="searchResults"></div>
+                        <div style="text-align: center; margin-top: 20px;">
+                            <p style="color: #666; font-size: 14px;">Pour des recherches spécifiques, contactez-nous directement</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(searchContainer);
+
+            // Add search button to navigation
+            const navbarNav = document.querySelector('.navbar-nav');
+            const searchLi = document.createElement('li');
+            searchLi.className = 'nav-item';
+            searchLi.innerHTML = '<a class="nav-link" href="#" onclick="openSearch()"><i class="fas fa-search"></i> Recherche</a>';
+            navbarNav.appendChild(searchLi);
+        }
+
+        window.openSearch = function() {
+            document.getElementById('searchOverlay').style.display = 'flex';
+            document.getElementById('searchInput').focus();
+        };
+
+        window.closeSearch = function() {
+            document.getElementById('searchOverlay').style.display = 'none';
+        };
+
+        // Sample products for search
+        const products = [
+            'Paracétamol', 'Ibuprofène', 'Aspirine', 'Amoxicilline', 'Doliprane',
+            'Crème solaire', 'Vitamines', 'Thermomètre', 'Pansements', 'Désinfectant',
+            'Sérum physiologique', 'Compléments alimentaires', 'Produits bébé'
+        ];
+
+        document.addEventListener('DOMContentLoaded', function() {
+            initSearch();
+            
+            document.getElementById('searchInput').addEventListener('input', function() {
+                const query = this.value.toLowerCase();
+                const results = document.getElementById('searchResults');
+                
+                if (query.length > 2) {
+                    const matches = products.filter(product => 
+                        product.toLowerCase().includes(query)
+                    ).slice(0, 5);
+                    
+                    if (matches.length > 0) {
+                        results.innerHTML = matches.map(product => 
+                            `<div style="padding: 10px; border-bottom: 1px solid #eee; cursor: pointer;" onclick="selectProduct('${product}')">${product}</div>`
+                        ).join('');
+                    } else {
+                        results.innerHTML = '<div style="padding: 10px; color: #666;">Aucun produit trouvé. Contactez-nous pour plus d\'informations.</div>';
+                    }
+                } else {
+                    results.innerHTML = '';
+                }
+            });
+        });
+
+        window.selectProduct = function(product) {
+            alert(`Pour obtenir ${product}, contactez-nous au +228 91 01 96 91 ou visitez notre pharmacie.`);
+            closeSearch();
+        };
+
+        // Contact form functionality
+        function addContactForm() {
+            const contactSection = document.createElement('section');
+            contactSection.id = 'contact';
+            contactSection.className = 'py-5';
+            contactSection.style.background = 'var(--light-bg)';
+            
+            contactSection.innerHTML = `
+                <div class="container">
+                    <div class="text-center mb-5">
+                        <h2 class="display-5 fw-bold">Contactez-Nous</h2>
+                        <p class="lead">Une question ? Un conseil ? Nous sommes là pour vous aider</p>
+                    </div>
+                    
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8">
+                            <div class="card border-0 shadow-lg">
+                                <div class="card-body p-5">
+                                    <form id="contactForm">
+                                        <div class="row">
+                                            <div class="col-md-6 mb-3">
+                                                <label for="name" class="form-label">Nom complet *</label>
+                                                <input type="text" class="form-control" id="name" required>
+                                            </div>
+                                            <div class="col-md-6 mb-3">
+                                                <label for="phone" class="form-label">Téléphone *</label>
+                                                <input type="tel" class="form-control" id="phone" required>
+                                            </div>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="email" class="form-label">Email</label>
+                                            <input type="email" class="form-control" id="email">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="subject" class="form-label">Sujet *</label>
+                                            <select class="form-control" id="subject" required>
+                                                <option value="">Choisissez un sujet</option>
+                                                <option value="medicament">Question sur un médicament</option>
+                                                <option value="livraison">Service de livraison</option>
+                                                <option value="conseil">Demande de conseil</option>
+                                                <option value="urgence">Urgence pharmaceutique</option>
+                                                <option value="autre">Autre</option>
+                                            </select>
+                                        </div>
+                                        <div class="mb-4">
+                                            <label for="message" class="form-label">Message *</label>
+                                            <textarea class="form-control" id="message" rows="5" required></textarea>
+                                        </div>
+                                        <div class="text-center">
+                                            <button type="submit" class="btn btn-primary btn-lg">
+                                                <i class="fas fa-paper-plane me-2"></i>Envoyer le message
+                                            </button>
+                                        </div>
+                                    </form>
+                                    
+                                    <div class="text-center mt-4 pt-4 border-top">
+                                        <h5 class="mb-3">Ou contactez-nous directement</h5>
+                                        <div class="d-flex justify-content-center gap-3 flex-wrap">
+                                            <a href="tel:+22822214846" class="btn btn-outline-primary">
+                                                <i class="fas fa-phone me-2"></i>Appeler
+                                            </a>
+                                            <a href="https://wa.me/22891019691" class="btn btn-outline-success" target="_blank">
+                                                <i class="fab fa-whatsapp me-2"></i>WhatsApp
+                                            </a>
+                                            <a href="mailto:pharmaciedelamarina@gmail.com" class="btn btn-outline-info">
+                                                <i class="fas fa-envelope me-2"></i>Email
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            // Insert before footer
+            const footer = document.querySelector('.footer');
+            footer.parentNode.insertBefore(contactSection, footer);
+            
+            // Add contact form submission handler
+            document.getElementById('contactForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const name = document.getElementById('name').value;
+                const phone = document.getElementById('phone').value;
+                const subject = document.getElementById('subject').value;
+                const message = document.getElementById('message').value;
+                
+                const whatsappMessage = `Bonjour, je suis ${name}. ${message}. Mon numéro: ${phone}`;
+                const whatsappUrl = `https://wa.me/22891019691?text=${encodeURIComponent(whatsappMessage)}`;
+                
+                window.open(whatsappUrl, '_blank');
+                
+                // Reset form
+                this.reset();
+                alert('Votre message va être envoyé via WhatsApp. Merci de votre confiance !');
+            });
+        }
+
+        // Initialize contact form when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            addContactForm();
+        });
+
+        // Add news/tips section
+        function addNewsSection() {
+            const newsSection = document.createElement('section');
+            newsSection.className = 'py-5';
+            newsSection.style.background = 'white';
+            
+            newsSection.innerHTML = `
+                <div class="container">
+                    <div class="text-center mb-5">
+                        <h2 class="display-5 fw-bold">Conseils Santé</h2>
+                        <p class="lead">Des conseils pratiques pour votre bien-être quotidien</p>
+                    </div>
+                    
+                    <div class="row g-4">
+                        <div class="col-lg-4 col-md-6">
+                            <div class="card h-100 border-0 shadow-sm">
+                                <div class="card-body">
+                                    <div class="text-center mb-3">
+                                        <i class="fas fa-sun fa-3x text-warning"></i>
+                                    </div>
+                                    <h5 class="card-title">Protection Solaire</h5>
+                                    <p class="card-text">Sous le climat togolais, protégez votre peau avec une crème solaire adaptée. Réappliquez toutes les 2 heures.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-4 col-md-6">
+                            <div class="card h-100 border-0 shadow-sm">
+                                <div class="card-body">
+                                    <div class="text-center mb-3">
+                                        <i class="fas fa-tint fa-3x text-primary"></i>
+                                    </div>
+                                    <h5 class="card-title">Hydratation</h5>
+                                    <p class="card-text">Buvez au moins 2 litres d'eau par jour, surtout pendant la saison chaude. L'hydratation est essentielle.</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="col-lg-4 col-md-6">
+                            <div class="card h-100 border-0 shadow-sm">
+                                <div class="card-body">
+                                    <div class="text-center mb-3">
+                                        <i class="fas fa-pills fa-3x text-success"></i>
+                                    </div>
+                                    <h5 class="card-title">Prise de Médicaments</h5>
+                                    <p class="card-text">Respectez les horaires et dosages prescrits. En cas de doute, consultez toujours votre pharmacien.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="text-center mt-5">
+                        <p class="text-muted">Pour plus de conseils personnalisés, consultez notre équipe pharmaceutique</p>
+                    </div>
+                </div>
+            `;
+            
+            // Insert before location section
+            const locationSection = document.getElementById('location');
+            locationSection.parentNode.insertBefore(newsSection, locationSection);
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            addNewsSection();
+        });
+
+        // Performance optimization
+        window.addEventListener('load', function() {
+            // Lazy loading for images if any were added
+            const images = document.querySelectorAll('img[data-src]');
+            const imageObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const img = entry.target;
+                        img.src = img.dataset.src;
+                        img.classList.remove('lazy');
+                        imageObserver.unobserve(img);
+                    }
+                });
+            });
+
+            images.forEach(img => imageObserver.observe(img));
+        });
+    </script>
+</body>
+</html>
