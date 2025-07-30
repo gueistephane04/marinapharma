@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pharmacie de la Marina - Lomé, Togo</title>
+    <meta name="description" content="Pharmacie de la Marina à Lomé, Togo. Médicaments, parapharmacie, conseils pharmaceutiques. Ouvert 7j/7 avec service de livraison.">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-green: #4CAF50;
+            --primary-orange: #FF5722;
+            --primary-blue: #2196F3;
+            --dark-blue: #1565C0;
+            --light-bg: #f8f9fa;
+            --white: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        /* Header */
+        .navbar {
+            background: linear-gradient(135deg, var(--dark-blue) 0%, var(--primary-blue) 100%);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            padding: 1rem 0;
+        }
+
+        .navbar-brand {
+            display: flex;
+            align-items: center;
+            font-weight: bold;
+            color: white !important;
+            font-size: 1.5rem;
+        }
+
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            margin-right: 15px;
+            background: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            border: 3px solid var(--primary-orange);
+        }
+
+        .logo-icon::before {
+            content: '+';
+            color: var(--primary-green);
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .logo-icon::after {
+            content: '〜〜〜';
+            position: absolute;
+            bottom: -5px;
+            color: var(--primary-blue);
+            font-size: 12px;
+        }
+
+        .navbar-nav .nav-link {
+            color: white !important;
+            margin: 0 10px;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: var(--primary-orange) !important;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--dark-blue) 100%);
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 100px;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120"><path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" opacity=".25" fill="%23ffffff"></path></svg>') no-repeat center bottom;
+            background-size: cover;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .btn-primary {
+            background: var(--primary-orange);
+            border: none;
+            padding: 12px 30px;
+            font-size: 1.1rem;
+            border-radius: 25px;
+            transition: all 0.3s;
+        }
+
+        .btn-primary:hover {
+            background: #E64A19;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        /* Quick Contact Bar */
+        .quick-contact {
+            background: var(--primary-green);
+            color: white;
+            padding: 15px 0;
+            text-align: center;
+        }
+
+        .contact-item {
+            display: inline-block;
+            margin: 0 20px;
+            font-weight: 500;
+        }
+
+        .contact-item i {
+            margin-right: 8px;
+            color: var(--primary-orange);
+        }
+
+        /* Services Section */
+        .services {
+            padding: 80px 0;
+            background: var(--light-bg);
+        }
+
+        .service-card {
+            background: white;
+            padding: 40px 30px;
+            border-radius: 15px;
+            text-align: center;
+            transition: all 0.3s;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            height: 100%;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .service-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            background: linear-gradient(135deg, var(--primary-green), var(--primary-blue));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 35px;
+            color: white;
+        }
+
+        .service-card h4 {
+            color: var(--dark-blue);
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        /* About Section */
+        .about {
+            padding: 80px 0;
+        }
+
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .about-text h2 {
+            color: var(--dark-blue);
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+
+        .about-text p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .pharmacist-info {
+            background: var(--light-bg);
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 4px solid var(--primary-green);
+        }
+
+        /* Hours Section */
+        .hours {
+            background: var(--primary-green);
+            color: white;
+            padding: 60px 0;
+        }
+
+        .hours-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .hours-card {
+            background: rgba(255,255,255,0.1);
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .hours-card h4 {
+            margin-bottom: 15px;
+            color: var(--primary-orange);
+        }
+
+        /* Location Section */
+        .location {
+            padding: 80px 0;
+            background: var(--light-bg);
+        }
+
+        .map-container {
+            height: 400px;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .location-info {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .location-info h3 {
+            color: var(--dark-blue);
+            margin-bottom: 25px;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+
+        .info-item i {
+            width: 40px;
+            color: var(--primary-green);
+            font-size: 1.2rem;
+        }
+
+        /* Emergency Section */
+        .emergency {
+            background: var(--primary-orange);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .emergency h2 {
+            margin-bottom: 20px;
+        }
+
+        .emergency-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .btn-emergency {
+            background: white;
+            color: var(--primary-orange);
+            padding: 15px 30px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-emergency:hover {
+            background: var(--light-bg);
+            color: var(--primary-orange);
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        .footer {
+            background: var(--dark-blue);
+            color: white;
+            padding: 50px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 30px;
+        }
+
+        .footer-section h5 {
+            color: var(--primary-orange);
+            margin-bottom: 20px;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-section ul li a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section ul li a:hover {
+            color: var(--primary-orange);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.2);
+            padding-top: 20px;
+            text-align: center;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .contact-item {
+                display: block;
+                margin: 5px 0;
+            }
+            
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .emergency-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        /* Animation */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.8s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="#home">
+                <div class="logo-icon"></div>
+                Pharmacie de la Marina
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#home">Accueil</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">À propos</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#hours">Horaires</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#location">Localisation</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Quick Contact Bar -->
+    <div class="quick-contact">
+        <div class="container">
+            <div class="contact-item">
+                <i class="fas fa-phone"></i>
+                +228 22 21 48 46
+            </div>
+            <div class="contact-item">
+                <i class="fab fa-whatsapp"></i>
+                +228 91 01 96 91
+            </div>
+            <div class="contact-item">
+                <i class="fas fa-clock"></i>
+                Lun-Ven: 07h-20h | Sam: 07h-13h
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="fade-in-up">
+                <h1>Pharmacie de la Marina</h1>
+                <p>Votre santé, notre priorité à Lomé</p>
+                <p class="lead">Médicaments • Parapharmacie • Conseils professionnels • Livraison à domicile</p>
+                <a href="#services" class="btn btn-primary btn-lg">Découvrir nos services</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="display-4 fw-bold text-primary">Nos Services</h2>
+                <p class="lead">Une gamme complète de services pharmaceutiques pour votre bien-être</p>
+            </div>
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-pills"></i>
+                        </div>
+                        <h4>Médicaments sur Ordonnance</h4>
+                        <p>Délivrance de médicaments avec conseil pharmaceutique personnalisé. Notre équipe vous accompagne dans votre traitement.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-heart"></i>
+                        </div>
+                        <h4>Parapharmacie & Bien-être</h4>
+                        <p>Cosmétiques, soins dermatologiques, produits d'hygiène, gammes naturelles et bio, soins pour bébés.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-stethoscope"></i>
+                        </div>
+                        <h4>Services de Santé</h4>
+                        <p>Mesure de tension artérielle, conseils diabète, espace de confidentialité pour consultations privées.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-truck"></i>
+                        </div>
+                        <h4>Livraison à Domicile</h4>
+                        <p>Service de livraison rapide dans Lomé et environs. Commandez par téléphone ou WhatsApp.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-moon"></i>
+                        </div>
+                        <h4>Pharmacie de Garde</h4>
+                        <p>Participation au système de garde nocturne et dominicale selon le planning des autorités locales.</p>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <i class="fas fa-user-md"></i>
+                        </div>
+                        <h4>Conseil Pharmaceutique</h4>
+                        <p>Accueil personnalisé et écoute professionnelle pour vous orienter vers les meilleures solutions santé.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6">
+                    <h2 class="display-5 fw-bold">À Propos de Nous</h2>
+                    <p>La Pharmacie de la Marina est située dans un emplacement stratégique sur le Boulevard du Mono, en zone côtière de Lomé, près du poste frontière d'AFLAO. Notre mission est de devenir une référence santé dans ce quartier proche du port et du centre-ville.</p>
+                    <p>Nous nous efforçons de construire notre réputation sur la confiance et la disponibilité envers notre clientèle locale, avec un personnel aimable et compétent offrant un service rapide et personnalisé.</p>
+                    
+                    <div class="pharmacist-info">
+                        <h5><i class="fas fa-user-md me-2 text-success"></i>Notre Équipe Pharmaceutique</h5>
+                        <p><strong>Pharmacien Titulaire :</strong> Dr Yaovi FIDEGNON</p>
+                        <p>Assisté par des pharmaciens assistants et des auxiliaires en pharmacie qualifiés qui assurent un service professionnel et attentionné.</p>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="text-center">
+                        <div style="width: 300px; height: 300px; background: linear-gradient(135deg, var(--primary-green), var(--primary-blue)); border-radius: 50%; margin: 0 auto; display: flex; align-items: center; justify-content: center; color: white; font-size: 4rem;">
+                            <i class="fas fa-pharmacy"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hours Section -->
+    <section id="hours" class="hours">
+        <div class="container text-center">
+            <h2 class="display-5 fw-bold mb-3">Horaires d'Ouverture</h2>
+            <p class="lead">Des horaires étendus pour mieux vous servir</p>
+            
+            <div class="hours-grid">
+                <div class="hours-card">
+                    <h4><i class="fas fa-calendar-week me-2"></i>Lundi - Vendredi</h4>
+                    <p class="fs-5">07h00 - 20h00</p>
+                    <small>Journée continue</small>
+                </div>
+                <div class="hours-card">
+                    <h4><i class="fas fa-calendar-day me-2"></i>Samedi</h4>
+                    <p class="fs-5">07h00 - 13h00</p>
+                    <small>Matinée uniquement</small>
+                </div>
+                <div class="hours-card">
+                    <h4><i class="fas fa-calendar-times me-2"></i>Dimanche</h4>
+                    <p class="fs-5">Fermé</p>
+                    <small>Sauf service de garde</small>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Location Section -->
+    <section id="location" class="location">
+        <div class="container">
+            <div class="text-center mb-5">
+                <h2 class="display-5 fw-bold">Notre Localisation</h2>
+                <p class="lead">Facilement accessible en zone côtière de Lomé</p>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-lg-8">
+                    <div class="map-container">
+                        <iframe 
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3967.123!2d1.254!3d6.138!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNsKwMDgnMTcuMCJOIDHCsDE1JzE0LjAiRQ!5e0!3m2!1sfr!2stg!4v1642000000000!5m2!1sfr!2stg"
+                            width="100%" 
+                            height="400" 
+                            style="border:0;" 
+                            allowfullscreen="" 
+                            loading="lazy">
+                        </iframe>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="location-info">
+                        <h3>Informations Pratiques</h3>
+                        
+                        <div class="info-item">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div>
+                                <strong>Adresse</strong><br>
+                                Boulevard du Mono RN 2<br>
+                                Poste Frontière AFLAO, Lomé
+                            </div>
+                        </div>
+                        
+                        <div class="info-item">
+                            <i class="fas fa-phone"></i>
+                            <div>
+                                <strong>Téléphone Fixe</strong><br>
+                                +228 22 21 48 46
+                            </div>
+                        </div>
+                        
+                        <div class="info-item">
+                            <i class="fas fa-mobile-alt"></i>
+                            <div>
+                                <strong>Portable</strong><br>
+                                +228 91 01 96 91
+                            </div>
+                        </div>
+                        
+                        <div class="info-item">
+                            <i class="fab fa-whatsapp"></i>
+                            <div>
+                                <strong>WhatsApp</strong><br>
+                                +228 91 01 96 91
+                            </div>
+                        </div>
+                        
+                        <div class="info-item">
+                            <i class="fas fa-envelope"></i>
+                            <div>
+                                <strong>Email</strong><br>
+                                pharmaciedelamarina@gmail.com
+                            </div>
+                        </div>
+                        
+                        <div class="info-item">
+                            <i class="fas fa-parking"></i>
+                            <div>
+                                <strong>Parking</strong><br>
+                                Stationnement disponible
+                            </div>
+                        </div>
+                        
+                        <div class="info-item">
+                            <i class="fas fa-wheelchair"></i>
+                            <div>
+                                <strong>Accessibilité</strong><br>
+                                Accès PMR - Plain-pied
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Emergency Section -->
+    <section class="emergency">
+        <div class="container">
+            <h2>Besoin Urgent ?</h2>
+            <p class="lead">Contactez-nous immédiatement pour vos urgences pharmaceutiques</p>
+            <div class="emergency-buttons">
+                <a href="tel:+22822214846" class="btn-emergency">
+                    <i class="fas fa-phone"></i>
+                    Appeler Maintenant
+                </a>
+                <a href="https://wa.me/22891019691" class="btn-emergency" target="_blank">
+                    <i class="fab fa-whatsapp"></i>
+                    WhatsApp
+                </a>
+                <a href="#location" class="btn-emergency">
+                    <i class="fas fa-map-marker-alt"></i>
+                    Nous Localiser
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h5>Pharmacie de la Marina</h5>
+                    <p>Votre partenaire santé de confiance à Lomé, Togo. Nous nous engageons à fournir des soins pharmaceutiques de qualité avec un service personnalisé.</p>
+                    <div class="mt-3">
+                        <a href="https://instagram.com/ph.marina" target="_blank" class="text-white me-3">
+                            <i class="fab fa-instagram fa-2x"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h5>Services</h5>
+                    <ul>
+                        <li><a href="#services">Médicaments sur ordonnance</a></li>
+                        <li><a href="#services">Parapharmacie</a></li>
+                        <li><a href="#services">Conseils pharmaceutiques</a></li>
+                        <li><a href="#services">Livraison à domicile</a></li>
+                        <li><a href="#services">Services de santé</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h5>Informations</h5>
+                    <ul>
+                        <li><a href="#about">À propos</a></li>
+                        <li><a href="#hours">Horaires</a></li>
+                        <li><a href="#location">Localisation</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li>Autorisations pharmaceutiques togolaises</li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h5>Contact Rapide</h5>
+                    <ul>
+                        <li><i class="fas fa-phone me-2"></i>+228 22 21 48 46</li>
+                        <li><i class="fas fa-mobile-alt me-2"></i>+228 91 01 96 91</li>
+                        <li><i class="fas fa-envelope me-2"></i>pharmaciedelamarina@gmail.com</li>
+                        <li><i class="fas fa-map-marker-alt me-2"></i>Boulevard du Mono, Lomé</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 Pharmacie de la Marina - Lomé, Togo. Tous droits réservés.</p>
+                <p><small>Site développé avec soin pour votre santé • Autorisations pharmaceutiques en conformité avec la réglementation togolaise</small></p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JS -->
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Navbar background change on scroll
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.style.background = 'rgba(21, 101, 192, 0.95)';
+                navbar.style.backdropFilter = 'blur(10px)';
+            } else {
+                navbar.style.background = 'linear-gradient(135deg, var(--dark-blue) 0%, var(--primary-blue) 100%)';
+                navbar.style.backdropFilter = 'none';
+            }
+        });
+
+        // Animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
